@@ -12,7 +12,17 @@
 using namespace std;
 
 
-Paciente::Paciente(): nome_paciente(""), nome_dono(), telefone(0), morada(""), raca(""), idade(0) {}
+Paciente::Paciente(): genero(Genero(0)), nome_paciente(""), nome_dono(), telefone(0), morada(""), raca(""), idade(0) {}
+Paciente::Paciente(Genero generop, string nomep, string nomed, unsigned int telefonep, string moradap, string racap, int idadep){
+	genero = Genero(generop);
+	nome_paciente = nomep;
+	nome_dono = nomed;
+	telefone = telefonep;
+	morada = moradap;
+	raca = racap;
+	idade = idadep;
+}
+
 
 void Paciente::setVisita(TipoVisita visita) {
 	registo_visitas.push_back(visita);
