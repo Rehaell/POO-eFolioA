@@ -6,8 +6,10 @@
  */
 
 #include "MainMenu.h"
+#include <ctype.h>
 
-void MainMenu::mostraMenuInicial(){
+
+void MainMenu::mostraMenuInicial() const {
 	cout<< "\n\n\n\n\n\n\n";
 	cout << R"(
 ***************************************
@@ -33,21 +35,46 @@ Pressione a tecla correspondente: )";
 }
 
 Paciente MainMenu::adicionarPaciente(){
-	Paciente paciente;
+
+	string nome, nomed, morada, raca;
+	int genero, telefone, idade;
+
+	cout<< "\n\n\n\n\n\n\n";
 	cout << R"(
 ***************************************
 * CLINICA VETERINARIA DO ARCO DO CEGO *
-***************************************
-* Genero:                             *
-* Nome:                               *
-* Nome Dono:                          *
-* Telefone:                           *
-* Morada:                             *
-* Raca                                *
-* Idade:                              *
 ***************************************)";
-	return paciente;
+	cout << "Genero (1 - Cao/ 2 - Gato): ";
+	cin >> genero;
+
+	if (genero != 1 && genero != 2){
+		cout << "\nOpcao nao valida";
+		adicionarPaciente();
+	}
+	cout << "Nome: ";
+	cin >> nome;
+	cout << " Nome Dono: ";
+	cin >> nomed;
+	cout << "Telefone: ";
+	cin >> telefone;
+	cout << "Morada: ";
+	cin >> morada;
+	cout << "Raca: ";
+	cin >> raca;
+	cout << " Idade: ";
+	cin >> idade;
+
+	return Paciente(genero, nome, nomed, telefone, morada, raca, idade);
 
 }
 
+void MainMenu::consultarCliente() const {
+	cout<< "\n\n\n\n\n\n\n";
+	cout << R"(
+***************************************
+* CLINICA VETERINARIA DO ARCO DO CEGO *
+***************************************")";
+	cout << "* Genero: (Cao/Gato)                  *";
 
+
+}

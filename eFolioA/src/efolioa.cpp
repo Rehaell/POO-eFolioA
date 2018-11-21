@@ -39,10 +39,12 @@ int main(){
 				pacientes.push_back(menu.adicionarPaciente());
     			break;
     	case (2) :
+    			menu.consultarCliente();
     			break;
     	}
     } while (escolha != 0);
 
+    cout << "Ate logo!";
 	return 0;
 }
 

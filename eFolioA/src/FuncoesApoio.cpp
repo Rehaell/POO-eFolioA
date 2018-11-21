@@ -25,6 +25,7 @@ void popularBaseDados(vector<Paciente>& tPacientes) {
 
 	for(unsigned int i = 0; i <10; ++i){
 		Paciente animal;
+		animal.setGenero((rand()%(2-1))+1);
 		animal.setIdade(rand() % 10 + 1); //atribui uma idade random
 		animal.setMorada("Rua numero " + to_string(i) + ",Lote " + to_string(i) +", "+ to_string(i)+"  Andar");
 		animal.setNomeDono("Nome_dono_" + to_string(i));
@@ -58,7 +59,7 @@ void mostrarBaseDados(vector<Paciente>& tPacientes){
 	for(unsigned int i =0 ; i< tPacientes.size(); ++i){
 		cout <<"\n*****************************************************";
 		cout << tPacientes[i].showPacientes();
-		for(unsigned int j = 0; j < tPacientes[i].getNumVisitas(); ++j) {
+		for(int j = 0; j < tPacientes[i].getNumVisitas(); ++j) {
 			cout <<"\n-----------------------------------------------------";
 			cout << tPacientes[i].registo_visitas[j].showVisitas();
 			cout <<"\n-----------------------------------------------------";

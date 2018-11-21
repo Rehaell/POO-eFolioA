@@ -12,10 +12,9 @@
 using namespace std;
 
 
-Paciente::Paciente(): genero(Genero(0)), nome_paciente(""), nome_dono(), telefone(0), morada(""), raca(""), idade(0) {}
-Paciente::Paciente(Genero generop, string nomep, string nomed, unsigned int telefonep, string moradap, string racap, int idadep){
-	genero = Genero(generop);
-	nome_paciente = nomep;
+Paciente::Paciente(): genero(0), nome_paciente(""), nome_dono(), telefone(0), morada(""), raca(""), idade(0) {}
+Paciente::Paciente(unsigned short generop, string nomep, string nomed, unsigned int telefonep, string moradap, string racap, int idadep){
+	genero = generop;
 	nome_dono = nomed;
 	telefone = telefonep;
 	morada = moradap;
@@ -31,7 +30,7 @@ void Paciente::setVisita(TipoVisita visita) {
 }
 
 string Paciente::showPacientes() const{
-	return "\nPaciente: " + nome_paciente + "\nDono: " + nome_dono + "\nTelefone: " + to_string(telefone) + "\nMorada: " + morada + "\nRaca: " + raca + "\nIdade: " + to_string(idade) +"\n";
+	return "\nGenero: " + to_string(genero) + "\nPaciente: " + nome_paciente + "\nDono: " + nome_dono + "\nTelefone: " + to_string(telefone) + "\nMorada: " + morada + "\nRaca: " + raca + "\nIdade: " + to_string(idade) +"\n";
 }
 
 

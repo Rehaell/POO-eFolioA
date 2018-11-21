@@ -10,6 +10,7 @@
 
 #include <iostream>
 #include <string>
+#include<algorithm>
 
 #include "Paciente.h"
 #include "TipoVisita.h"
@@ -22,8 +23,9 @@ public:
 	MainMenu(){}
 	~MainMenu(){}
 
-	void mostraMenuInicial();
+	void mostraMenuInicial() const;
 	Paciente adicionarPaciente();
+	void consultarCliente() const;
 };
 
 
