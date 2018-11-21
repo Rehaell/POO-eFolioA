@@ -76,5 +76,4 @@ void MainMenu::consultarCliente() const {
 ***************************************")";
 	cout << "* Genero: (Cao/Gato)                  *";
 
-
 }
