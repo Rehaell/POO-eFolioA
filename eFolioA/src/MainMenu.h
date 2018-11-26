@@ -35,6 +35,8 @@ public:
 	void setVisita(vector<Paciente>::iterator& i);
 
 	void consultarVisitas(vector<Paciente>& pacientes);
+
+	void OcorrenciasPorMes(vector<Paciente>& pacientes);
 };
 
 

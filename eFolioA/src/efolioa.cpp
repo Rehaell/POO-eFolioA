@@ -28,10 +28,10 @@ int main(){
 	vector<Paciente> pacientes;
 
 
-	popularBaseDados(pacientes, 2);
+	popularBaseDados(pacientes, 1);
     //mostrarBaseDados(pacientes);
 
-    do{
+   do{
     	menu.mostraMenuInicial();
     	cin >> escolha;
     	switch (escolha) {
@@ -60,6 +60,7 @@ int main(){
     cout << "Ate logo!";
 
     return 0;
+
 }
 
 

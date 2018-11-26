@@ -56,6 +56,7 @@ public:
 	inline string getNome() { return nome_paciente; };
 
 	inline unsigned int getVisitas() const { return registo_visitas.size(); }
+	inline vector<TipoVisita> getRegisto() { return registo_visitas; }
 
 	void showPacienteInfo(bool visitas) const;
 

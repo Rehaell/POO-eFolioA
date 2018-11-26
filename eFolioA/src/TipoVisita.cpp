@@ -43,11 +43,11 @@ void TipoVisita::showVisita() const {
 	cout << "\nEvento: " << setw(tipoEvento.length())  << tipoEvento << endl;
 	cout << "Razao: "  << setw(razao.length() + 1)       << razao << endl;
 	cout << "Medico: " << setw(nome_medico.length()) << nome_medico << endl;
-	cout << "Data: "   << now->tm_mon << "/" << now->tm_mday << "/" << now->tm_year << " " << now->tm_hour << ":" << now->tm_min << ":" << now->tm_sec<< endl;
+	cout << "Data: "   << now->tm_mon << "/" << now->tm_mday << "/" << now->tm_year + 1900 << " " << now->tm_hour << ":" << now->tm_min << ":" << now->tm_sec<< endl;
 	if (tipoEvento=="Internamento"){
 		cout << "Duracao: "   << setw(to_string(duracao).length()) << to_string(duracao) << " dias" << endl;
 		now = localtime(&data_alta);
-		cout << "Data: "   << now->tm_mon << "/" << now->tm_mday << "/" << now->tm_year << " " << now->tm_hour << ":" << now->tm_min << ":" << now->tm_sec<< endl;
+		cout << "Data: "   << now->tm_mon << "/" << now->tm_mday << "/" << now->tm_year + 1900 << " " << now->tm_hour << ":" << now->tm_min << ":" << now->tm_sec<< endl;
 	}
 
 }

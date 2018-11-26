@@ -62,7 +62,3 @@ void Paciente::showPacienteInfo(bool visitas) const{
 		}
 	}
 }
-
-
-
-

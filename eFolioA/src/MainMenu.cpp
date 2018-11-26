@@ -33,7 +33,8 @@ Pressione a tecla correspondente: )";
 void MainMenu::adicionarPaciente(vector<Paciente>& pacientes){
 
 	string nome, nomed, morada, raca;
-	int genero, telefone, idade;
+
+	unsigned int genero, idade, telefone;
 
 	cout<< "\n\n\n\n\n\n\n";
 
@@ -62,9 +63,9 @@ void MainMenu::adicionarPaciente(vector<Paciente>& pacientes){
 	getline(cin, morada);
 
 
+
 	cout << "Raca: ";
 	getline(cin, raca);
-
 
 	cout << "Idade: ";
 	cin >> idade;
@@ -106,8 +107,8 @@ void MainMenu::setVisita(vector<Paciente>::iterator& i){
 	int evento, duracao = 0;
 	string razao, nome_medico, data;
 
-	tm tm;
-	int dia, mes, ano, horas, minutos;
+	tm tm = {0};
+	int mes, dia, ano, hora, min;
 
 	do {
         cin.clear();
@@ -126,14 +127,12 @@ void MainMenu::setVisita(vector<Paciente>::iterator& i){
 	cout << "Qual a data da visita (MM/DD/AAAA HH:MM): ";
 	getline(cin, data);
 
-	sscanf(data.c_str(), "%2d/%2d/%4d %2d:%2d", &mes, &dia, &ano, &horas, &minutos);
-	tm.tm_mon = mes-1;
+	sscanf(data.c_str(), "%2d/%2d/%4d %2d:%2d", &mes, &dia, &ano, &hora, &min);
+	tm.tm_mon = mes - 1;
 	tm.tm_mday = dia;
 	tm.tm_year = ano - 1900;
-	tm.tm_hour = horas;
-	tm.tm_min = minutos;
-
-	time_t tt = std::mktime(&tm);
+	tm.tm_hour = hora;
+	tm.tm_min = min;
 
 	if(evento == 3) {
 		cin.ignore();
@@ -141,7 +140,7 @@ void MainMenu::setVisita(vector<Paciente>::iterator& i){
 		cin >> duracao;
 	}
 
-	TipoVisita visita(evento, razao, nome_medico, tt, duracao);
+	TipoVisita visita(evento, razao, nome_medico, mktime(&tm), duracao);
 
 	(*i).setVisita(visita);
 }
@@ -187,8 +186,9 @@ void MainMenu::consultarVisitas(vector<Paciente>& pacientes) {
 * Compromissos                           *
 * 1 - Todos                              *
 * 2 - Sumario por cliente                *
+* 3 - Sumario por mes                    *
 *----------------------------------------*
-* 3 - Voltar                             *
+* 4 - Voltar                             *
 ******************************************
 Pressione a tecla correspondente: )";
 		cin >> escolha;
@@ -206,9 +206,45 @@ Pressione a tecla correspondente: )";
 					cout << "Total de Internamentos: " << pacientes[i].getInternamento() << endl;
 				}
 				break;
+			case (3):
+				OcorrenciasPorMes(pacientes);
+				break;
 			default:
 				break;
 		};
-	} while (escolha != 3);
+	} while (escolha != 4);
 
+}
+
+void MainMenu::OcorrenciasPorMes(vector<Paciente>& pacientes) {
+
+	struct Mes{
+		int consultas = 0;
+		int operacoes = 0;
+		int internamentos = 0;
+	};
+
+	vector<Mes> meses(12);
+
+	for(unsigned int i = 0; i < pacientes.size(); ++i){
+		vector<TipoVisita> visitas = pacientes[i].getRegisto();
+		for(unsigned int j = 0;  j< visitas.size(); ++j){
+			time_t t = visitas[j].getData();
+			tm* tm = localtime(&t);
+			if (visitas[j].getTipoEvento() == 1){
+				meses[tm->tm_mon].consultas += 1;
+			} else if (visitas[j].getTipoEvento() == 2){
+			 	meses[tm->tm_mon].operacoes += 1;
+			} else if (visitas[j].getTipoEvento() == 3){
+				meses[tm->tm_mon].internamentos+= 1;
+			}
+		}
+	}
+
+	for(unsigned int i=0; i<meses.size(); ++i ) {
+		cout << "\nOcorrencias mes: " << i + 1<< endl;
+		cout << "Consultas : " << meses[i].consultas << endl;
+		cout << "Operacoes : " << meses[i].operacoes << endl;
+		cout << "Internamentos : " << meses[i].internamentos << endl;
+	}
 }
