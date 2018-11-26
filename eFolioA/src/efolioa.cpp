@@ -28,7 +28,7 @@ int main(){
 	vector<Paciente> pacientes;
 
 
-	//popularBaseDados(pacientes, 2);
+	popularBaseDados(pacientes, 2);
     //mostrarBaseDados(pacientes);
 
     do{
@@ -47,6 +47,11 @@ int main(){
 			if(pacientes.size() == 0)
 				cout << "Nao existem clientes na base de dados!";
 			else menu.adicionarEvento(pacientes);
+    		break;
+    	case (4):
+				if(pacientes.size() == 0)
+					cout << "Nao existem clientes na base de dados!";
+				else menu.consultarVisitas(pacientes);
     		break;
     	default:
     		break;

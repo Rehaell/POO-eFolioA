@@ -11,6 +11,9 @@
 #include <string>
 #include <vector>
 #include <ctype.h>
+#include <algorithm>
+#include <iostream>
+#include <iomanip>
 
 #include "TipoVisita.h"
 
@@ -28,11 +31,15 @@ class Paciente {
 	string raca;
 	int idade;
 
-	vector<TipoVisita> registo_visitas; //PASSAR PARA PRIVATE, PUBLICO SO PARA FASE DE TESTE
+	int num_consulta;
+	int num_operacoes;
+	int num_internamento;
+
+	vector<TipoVisita> registo_visitas;
 
 public:
 
-	Paciente(): genero(CAO), nome_paciente(""), nome_dono(), telefone(0), morada(""), raca(""), idade(0) {}
+	Paciente(): genero(CAO), nome_paciente(""), nome_dono(), telefone(0), morada(""), raca(""), idade(0), num_consulta(0), num_operacoes(0), num_internamento(0) {}
 	Paciente(int generop, string nomep, string nomed, unsigned int telefonep, string moradap, string racap, int idadep);
 	~Paciente(){}
 
@@ -44,14 +51,17 @@ public:
 	inline void setRaca(string craca) { raca = craca; }
 	inline void setIdade(int cidade) { idade = cidade; }
 
-	inline string getGenero() { return (genero == 1 ? "Cao" : "Gato"); }
-
 	void setVisita(TipoVisita visita);
 
-	inline int getNumVisitas() { return registo_visitas.size(); }
+	inline string getNome() { return nome_paciente; };
+
+	inline unsigned int getVisitas() const { return registo_visitas.size(); }
 
 	void showPacienteInfo(bool visitas) const;
 
+	inline int getConsultas() const { return num_consulta; }
+	inline int getOperacoes() const { return num_operacoes; }
+	inline int getInternamento() const { return num_internamento; }
 };
 
 

@@ -5,9 +5,7 @@
  *      Author: rui romao
  */
 
-#include <algorithm>
-#include <iostream>
-#include <iomanip>
+
 
 
 #include "Paciente.h"
@@ -23,12 +21,28 @@ Paciente::Paciente(int generop, string nomep, string nomed, unsigned int telefon
 	morada = moradap;
 	raca = racap;
 	idade = idadep;
+	num_consulta = 0;
+	num_operacoes = 0;
+	num_internamento = 0;
 }
 
 
 void Paciente::setVisita(TipoVisita visita) {
 	registo_visitas.push_back(visita);
 	sort(registo_visitas.begin(),registo_visitas.end(), greater<TipoVisita>());
+	switch (visita.getTipoEvento()) {
+		case (1):
+			num_consulta += 1;
+			break;
+		case (2):
+			num_operacoes += 1;
+			break;
+		case (3):
+			num_internamento += 1;
+			break;
+		default:
+			break;
+	};
 }
 
 void Paciente::showPacienteInfo(bool visitas) const{
@@ -48,7 +62,6 @@ void Paciente::showPacienteInfo(bool visitas) const{
 		}
 	}
 }
-
 
 
 

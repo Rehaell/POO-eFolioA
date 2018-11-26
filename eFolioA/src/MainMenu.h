@@ -10,12 +10,11 @@
 
 #include <iostream>
 #include <string>
-#include<algorithm>
+#include <algorithm>
 #include <vector>
 #include <ctype.h>
 #include <iterator>
 #include <chrono>
-
 
 #include "Paciente.h"
 #include "TipoVisita.h"
@@ -34,6 +33,8 @@ public:
 
 	void adicionarEvento(vector<Paciente>& pacientes);
 	void setVisita(vector<Paciente>::iterator& i);
+
+	void consultarVisitas(vector<Paciente>& pacientes);
 };
 
 

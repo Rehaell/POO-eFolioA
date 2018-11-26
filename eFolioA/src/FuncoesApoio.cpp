@@ -8,6 +8,7 @@
 #include <vector>
 #include <thread>
 #include <iostream>
+#include <time.h>
 
 #include "Paciente.h"
 #include "TipoVisita.h"
@@ -25,8 +26,11 @@ void popularBaseDados(vector<Paciente>& tPacientes, unsigned int num_pacientes) 
 
 	for(unsigned int i = 0; i <num_pacientes; ++i){
 		Paciente animal;
-		animal.setGenero((rand()%(2-1))+1);
-		animal.setIdade(rand() % 10 + 1); //atribui uma idade random
+		int random = 0;
+		random = (rand()%(2-1))+1;
+		animal.setGenero(random);
+		random = rand() % 10 + 1;
+		animal.setIdade(random); //atribui uma idade random
 		animal.setMorada("Rua numero " + to_string(i) + ",Lote " + to_string(i) +", "+ to_string(i)+"  Andar");
 		animal.setNomeDono("Nome_dono_" + to_string(i));
 		animal.setNomePaciente("Nome_paciente_" + to_string(i));
@@ -38,36 +42,12 @@ void popularBaseDados(vector<Paciente>& tPacientes, unsigned int num_pacientes) 
 			this_thread::sleep_for(std::chrono::seconds(1));
 			int tipoevento = rand() % 3 + 1;
 			int duracao = rand() % 10 + 1;
-			TipoVisita visita( tipoevento , "Visita normal numero " + to_string(j),"Nome_medico_" + to_string(j) ,system_clock::now(), duracao );
+			TipoVisita visita( tipoevento , "Visita normal numero " + to_string(j),"Nome_medico_" + to_string(j) , std::time(0), duracao );
 
 			animal.setVisita(visita);
 		}
 		tPacientes.push_back(animal);
 	}
-}
-
-/***************************************************************************
- * NOME: mostrarBaseDados                                                  *
- * ------------------------------------------------------------------------*
- * VARIAVEIS: Referencia para um vector de objectos do tipo Paciente       *
- * ------------------------------------------------------------------------*
- * FUNCAO: Imprime na consola o conteudo do vector pacientes para efeitos  *
- *         de troubleshooting                                              *
- *                                                                         *
- ***************************************************************************/
-void mostrarBaseDados(vector<Paciente>& tPacientes){
-	for(unsigned int i =0 ; i< tPacientes.size(); ++i){
-		cout <<"\n*****************************************************";
-		//cout << tPacientes[i].showPacientes();
-		for(int j = 0; j < tPacientes[i].getNumVisitas(); ++j) {
-			cout <<"\n-----------------------------------------------------";
-			//cout << tPacientes[i].registo_visitas[j].showVisitas();
-			cout <<"\n-----------------------------------------------------";
-		}
-
-		cout <<"\n*****************************************************\n";
-	}
-
 }
 
 

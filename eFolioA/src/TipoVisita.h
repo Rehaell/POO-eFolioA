@@ -9,13 +9,12 @@
 #define TIPOVISITA_H_
 
 #include <string>
-#include <chrono>
 #include <iostream>
 #include <iomanip>
 
 
 using namespace std;
-using namespace chrono;
+
 
 class TipoVisita {
 	enum TipoEvento {
@@ -25,18 +24,20 @@ class TipoVisita {
 	} evento;
 	string razao;
 	string nome_medico;
-	system_clock::time_point data;
+	time_t data;
 	int duracao;
-	system_clock::time_point data_alta;
+	time_t data_alta;
 
 public:
-		TipoVisita(): evento(consulta), razao(""), nome_medico(""), data(system_clock::now()), duracao(0), data_alta(system_clock::now()){}
-		TipoVisita(int event, string reason, string medic, system_clock::time_point date, int length);
+		TipoVisita(): evento(consulta), razao(""), nome_medico(""), data(time(0)), duracao(0), data_alta(time(0)){}
+		TipoVisita(int event, string reason, string medic, time_t date, int length);
 		~TipoVisita(){}
 
-		system_clock::time_point getData() const { return data; }
+		time_t getData() const { return data; }
 
-		bool operator > (const TipoVisita& v) const { return (data >= v.getData()); }
+		inline int getTipoEvento () const { return evento; }
+
+		bool operator > (const TipoVisita& v) const { return difftime(data, v.getData()) >= 0.0 ? true : false; }
 
 		void showVisita() const;
 };
