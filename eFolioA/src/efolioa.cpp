@@ -31,12 +31,15 @@ int main(){
 	int escolha = 0;
     do{
     	menu.mostraMenuInicial();
-    	cin >> escolha;
     	cin.clear();
-		cin.ignore(INT_MAX, '\n');
+    	cin >> escolha;
     	switch (escolha) {
     	case (1) :
-				pacientes.push_back(menu.adicionarPaciente());
+				if(menu.adicionarPaciente(pacientes)){
+					cout << "Paciente adicionado com sucesso!";
+				}
+				else
+					cout << "Ocorreu um erro ao adicionar paciente!";
     			break;
     	case (2) :
     			menu.consultarCliente();

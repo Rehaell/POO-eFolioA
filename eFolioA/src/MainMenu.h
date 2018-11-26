@@ -11,6 +11,8 @@
 #include <iostream>
 #include <string>
 #include<algorithm>
+#include <vector>
+
 
 #include "Paciente.h"
 #include "TipoVisita.h"
@@ -24,7 +26,7 @@ public:
 	~MainMenu(){}
 
 	void mostraMenuInicial() const;
-	Paciente adicionarPaciente();
+	bool adicionarPaciente(vector<Paciente>& pacientes);
 	void consultarCliente() const;
 };
 

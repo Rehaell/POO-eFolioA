@@ -20,13 +20,12 @@ void MainMenu::mostraMenuInicial() const {
 * Pacientes                           *
 * 1 - Adicionar                       *
 * 2 - Consultar                       *
-* 3 - Remover                         *
 *-------------------------------------*
 * Compromissos                        *
-* 4 - Consulta / Operacao             *
-* 5 - Internamento                    *
-* 6 - Consultar                       *
-* 7 - Remover                         * 
+* 3 - Consulta / Operacao             *
+* 4 - Internamento                    *
+* 5 - Consultar                       *
+* 6 - Remover                         * 
 *-------------------------------------*
 * 0 - Sair                            *
 ***************************************
@@ -34,7 +33,7 @@ Pressione a tecla correspondente: )";
 
 }
 
-Paciente MainMenu::adicionarPaciente(){
+bool MainMenu::adicionarPaciente(vector<Paciente>& pacientes){
 
 	string nome, nomed, morada, raca;
 	int genero, telefone, idade;
@@ -44,27 +43,36 @@ Paciente MainMenu::adicionarPaciente(){
 ***************************************
 * CLINICA VETERINARIA DO ARCO DO CEGO *
 ***************************************)";
-	cout << "Genero (1 - Cao/ 2 - Gato): ";
+	cin.clear();
+	cout << "\nGenero (1 - Cao/ 2 - Gato): ";
 	cin >> genero;
-
 	if (genero != 1 && genero != 2){
 		cout << "\nOpcao nao valida";
-		adicionarPaciente();
+		return false;
 	}
 	cout << "Nome: ";
 	cin >> nome;
-	cout << " Nome Dono: ";
+	cout << "Nome Dono: ";
 	cin >> nomed;
 	cout << "Telefone: ";
 	cin >> telefone;
+	if (!isdigit(telefone)){
+		cout << "\nOpcao nao valida";
+		return false;
+	}
 	cout << "Morada: ";
 	cin >> morada;
 	cout << "Raca: ";
 	cin >> raca;
 	cout << " Idade: ";
 	cin >> idade;
-
-	return Paciente(genero, nome, nomed, telefone, morada, raca, idade);
+	if (!isdigit(idade)){
+		cout << "\nOpcao nao valida";
+		cin.clear();
+		return false;
+	}
+	pacientes.push_back(Paciente(genero, nome, nomed, telefone, morada, raca, idade));
+	return true;
 
 }
 
