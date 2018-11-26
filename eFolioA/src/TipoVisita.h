@@ -17,6 +17,7 @@ using namespace std;
 
 
 class TipoVisita {
+	//Enum para guardar o tipo de eventos
 	enum TipoEvento {
 		consulta = 1,
 		operacao,
@@ -37,8 +38,11 @@ public:
 
 		inline int getTipoEvento () const { return evento; }
 
-		bool operator > (const TipoVisita& v) const { return difftime(data, v.getData()) >= 0.0 ? true : false; }
+		//Compara dois objectos do TipoVisita, calculando a diferenca entre as suas datas, se a diferenca for negativa
+		//significa que o objecto corrente e' menor que o objecto a que queremos comparar
+		inline bool operator > (const TipoVisita& v) const { return difftime(data, v.getData()) >= 0.0 ? true : false; }
 
+		//Mostra os detalhes de uma dada visita
 		void showVisita() const;
 };
 

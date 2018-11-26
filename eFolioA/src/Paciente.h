@@ -43,6 +43,7 @@ public:
 	Paciente(int generop, string nomep, string nomed, unsigned int telefonep, string moradap, string racap, int idadep);
 	~Paciente(){}
 
+	//Funcoes usadas na construcao de um objecto do tipo Paciente
 	inline void setGenero(int cgenero) { genero = Genero(cgenero); }
 	inline void setNomePaciente(string cnome) { nome_paciente = cnome; }
 	inline void setNomeDono(string cnome) { nome_dono = cnome; }
@@ -51,15 +52,22 @@ public:
 	inline void setRaca(string craca) { raca = craca; }
 	inline void setIdade(int cidade) { idade = cidade; }
 
+	//Adiciona um objecto visita ao vector registo_visitas
 	void setVisita(TipoVisita visita);
 
+	//Retorna o nome do paciente
 	inline string getNome() { return nome_paciente; };
 
+	//Retorna o total de visitas que o paciente efectou desde sempre
 	inline unsigned int getVisitas() const { return registo_visitas.size(); }
-	inline vector<TipoVisita> getRegisto() { return registo_visitas; }
 
+	//retorna uma referencia do vector registo visitas
+	inline vector<TipoVisita>& getRegisto() { return registo_visitas; }
+
+	//Imprime os detalhas do paciente com ou sem detalhes de visitas decidido pela variavel do tipo bool
 	void showPacienteInfo(bool visitas) const;
 
+	//retorna o total de eventos por cada tipo de um dado paciente
 	inline int getConsultas() const { return num_consulta; }
 	inline int getOperacoes() const { return num_operacoes; }
 	inline int getInternamento() const { return num_internamento; }

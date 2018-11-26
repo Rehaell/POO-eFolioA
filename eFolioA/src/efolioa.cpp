@@ -18,7 +18,6 @@
 
 
 void popularBaseDados(vector<Paciente>& tPacientes, unsigned int num_pacientes);
-//void mostrarBaseDados(vector<Paciente>& tPacientes);
 
 int main(){
 
@@ -27,28 +26,32 @@ int main(){
 
 	vector<Paciente> pacientes;
 
+	//popula a base de dados automaticamente para efeitos de T/S
+	popularBaseDados(pacientes, 5);
 
-	popularBaseDados(pacientes, 1);
-    //mostrarBaseDados(pacientes);
-
-   do{
+	//Menu inicial e escolha dos sub-menus / 0 - Para sair
+    do{
     	menu.mostraMenuInicial();
     	cin >> escolha;
     	switch (escolha) {
     	case (1) :
+    		//Metodo adicionar clientes
 			menu.adicionarPaciente(pacientes);
     		break;
     	case (2) :
+    		//Metodo consultar clientes, caso existam
 			if(pacientes.size() == 0)
 				cout << "Nao existem clientes na base de dados!";
 			else menu.consultarCliente(pacientes);
     		break;
     	case (3) :
+    		//Metodo adicionar eventos a clientes, caso existem clientes
 			if(pacientes.size() == 0)
 				cout << "Nao existem clientes na base de dados!";
 			else menu.adicionarEvento(pacientes);
     		break;
     	case (4):
+    			//Consulta de eventos caso existam clientes
 				if(pacientes.size() == 0)
 					cout << "Nao existem clientes na base de dados!";
 				else menu.consultarVisitas(pacientes);
@@ -57,6 +60,7 @@ int main(){
     		break;
     	}
     } while (escolha != 0);
+
     cout << "Ate logo!";
 
     return 0;

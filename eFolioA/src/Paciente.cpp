@@ -26,7 +26,9 @@ Paciente::Paciente(int generop, string nomep, string nomed, unsigned int telefon
 	num_internamento = 0;
 }
 
-
+/* Adiciona uma visita ao vector registo de visitas, organizando-o por ordem mais recente
+ * Actualiza tambem o total de tipo eventos que um dado paciente ja realizou desde sempre
+ * */
 void Paciente::setVisita(TipoVisita visita) {
 	registo_visitas.push_back(visita);
 	sort(registo_visitas.begin(),registo_visitas.end(), greater<TipoVisita>());
@@ -45,6 +47,9 @@ void Paciente::setVisita(TipoVisita visita) {
 	};
 }
 
+/*
+ * Mostra as informacoes de um dado paciente
+ * Opcional: quando visitas = true, mostra tambem todos os eventos realizados*/
 void Paciente::showPacienteInfo(bool visitas) const{
 	string pgenero = (genero == 1 ? "Cao" : "Gato");
 	cout << "\n\n\n\n\n\n\n\n\n\n";

@@ -7,7 +7,9 @@
 
 #include "MainMenu.h"
 
+// Funcoes de da classe MainMenu
 
+//Mostra o menu inicial
 void MainMenu::mostraMenuInicial() const {
 	cout<< "\n\n\n\n\n\n\n";
 	cout << R"(
@@ -30,6 +32,7 @@ Pressione a tecla correspondente: )";
 
 }
 
+//Adiciona um paciente ao vector recebido por referencia
 void MainMenu::adicionarPaciente(vector<Paciente>& pacientes){
 
 	string nome, nomed, morada, raca;
@@ -73,6 +76,9 @@ void MainMenu::adicionarPaciente(vector<Paciente>& pacientes){
 	pacientes.push_back(Paciente(genero, nome, nomed, telefone, morada, raca, idade));
 }
 
+/*Mostra os pacientes e permite a navegacao pelo vector recebido por referencia
+ * Caso nos encontremos nos pontos extremos do vector, nada acontece.
+ * Permite tambem retirar o paciente iterado pela posicao actual da navegacao*/
 void MainMenu::consultarCliente(vector<Paciente>& pacientes) {
 
 	int escolha = 3;
@@ -102,6 +108,10 @@ void MainMenu::consultarCliente(vector<Paciente>& pacientes) {
 
 }
 
+/* Adiciona uma visita ao vector de pacientes passado por referencia
+ *
+ * Nota: Esta funcao e' uma extensao da funcao adcionarEvento, e' nesta funcao
+ * 	     que efectivamente o evento e' adicionado ao vector  */
 void MainMenu::setVisita(vector<Paciente>::iterator& i){
 
 	int evento, duracao = 0;
@@ -144,6 +154,10 @@ void MainMenu::setVisita(vector<Paciente>::iterator& i){
 
 	(*i).setVisita(visita);
 }
+
+/* Submenu de adicionar evento, permite navegar no vector pacientes mostrando os eventos
+ * de cada paciente, quando atinge os extremos do vector para de mostrar os pacientes
+ * Permite tambem chamar a subfuncao setVisita para efectivamente adicionar o evento ao vector Pacientes */
 void MainMenu::adicionarEvento(vector<Paciente>& pacientes) {
 	int escolha = 10;
 	vector<Paciente>::iterator i = pacientes.begin();
@@ -171,6 +185,11 @@ void MainMenu::adicionarEvento(vector<Paciente>& pacientes) {
 	} while(escolha != 3);
 }
 
+
+/* Submenu consultar visitas
+ * Permite mostrar todos os compromissos de todos os pacientes
+ * Um sumario de eventos por cliente
+ * E um sumario de eventos organizado por mes*/
 void MainMenu::consultarVisitas(vector<Paciente>& pacientes) {
 
 	int escolha = 3;
@@ -216,6 +235,10 @@ Pressione a tecla correspondente: )";
 
 }
 
+/* Funcao de apoio a funcao consultarVisitas
+ * Conta o numero de eventos por tipo, e organiza-os num vector meses de tamanho 12
+ * correspondente ao numero de meses
+ * No final mostra a contagem por posicao do vector de cada tipo de evento*/
 void MainMenu::OcorrenciasPorMes(vector<Paciente>& pacientes) {
 
 	struct Mes{
