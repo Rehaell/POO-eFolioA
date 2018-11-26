@@ -17,38 +17,44 @@
 
 
 
-void popularBaseDados(vector<Paciente>& tPacientes);
-void mostrarBaseDados(vector<Paciente>& tPacientes);
+void popularBaseDados(vector<Paciente>& tPacientes, unsigned int num_pacientes);
+//void mostrarBaseDados(vector<Paciente>& tPacientes);
 
 int main(){
 
-	vector<Paciente> pacientes;
-
-	//popularBaseDados(pacientes);
-    //mostrarBaseDados(pacientes);
-
 	MainMenu menu;
 	int escolha = 0;
+
+	vector<Paciente> pacientes;
+
+
+	//popularBaseDados(pacientes, 2);
+    //mostrarBaseDados(pacientes);
+
     do{
     	menu.mostraMenuInicial();
-    	cin.clear();
     	cin >> escolha;
     	switch (escolha) {
     	case (1) :
-				if(menu.adicionarPaciente(pacientes)){
-					cout << "Paciente adicionado com sucesso!";
-				}
-				else
-					cout << "Ocorreu um erro ao adicionar paciente!";
-    			break;
+			menu.adicionarPaciente(pacientes);
+    		break;
     	case (2) :
-    			menu.consultarCliente();
-    			break;
+			if(pacientes.size() == 0)
+				cout << "Nao existem clientes na base de dados!";
+			else menu.consultarCliente(pacientes);
+    		break;
+    	case (3) :
+			if(pacientes.size() == 0)
+				cout << "Nao existem clientes na base de dados!";
+			else menu.adicionarEvento(pacientes);
+    		break;
+    	default:
+    		break;
     	}
     } while (escolha != 0);
-
     cout << "Ate logo!";
-	return 0;
+
+    return 0;
 }
 
 

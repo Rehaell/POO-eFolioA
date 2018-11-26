@@ -6,15 +6,18 @@
  */
 
 #include <algorithm>
+#include <iostream>
+#include <iomanip>
+
+
 #include "Paciente.h"
 
 
 using namespace std;
 
-
-Paciente::Paciente(): genero(0), nome_paciente(""), nome_dono(), telefone(0), morada(""), raca(""), idade(0) {}
-Paciente::Paciente(unsigned short generop, string nomep, string nomed, unsigned int telefonep, string moradap, string racap, int idadep){
-	genero = generop;
+Paciente::Paciente(int generop, string nomep, string nomed, unsigned int telefonep, string moradap, string racap, int idadep){
+	genero = Genero(generop);
+	nome_paciente = nomep;
 	nome_dono = nomed;
 	telefone = telefonep;
 	morada = moradap;
@@ -26,11 +29,24 @@ Paciente::Paciente(unsigned short generop, string nomep, string nomed, unsigned 
 void Paciente::setVisita(TipoVisita visita) {
 	registo_visitas.push_back(visita);
 	sort(registo_visitas.begin(),registo_visitas.end(), greater<TipoVisita>());
-
 }
 
-string Paciente::showPacientes() const{
-	return "\nGenero: " + to_string(genero) + "\nPaciente: " + nome_paciente + "\nDono: " + nome_dono + "\nTelefone: " + to_string(telefone) + "\nMorada: " + morada + "\nRaca: " + raca + "\nIdade: " + to_string(idade) +"\n";
+void Paciente::showPacienteInfo(bool visitas) const{
+	string pgenero = (genero == 1 ? "Cao" : "Gato");
+	cout << "\n\n\n\n\n\n\n\n\n\n";
+	cout << "Genero: "    << setw(pgenero.length() + 2) << pgenero << endl;
+	cout << "Paciente: "  << setw(nome_paciente.length())         << nome_paciente << endl;
+	cout << "Dono: "      << setw(nome_dono.length() + 4)         << nome_dono << endl;
+	cout << "Telefone: "  << setw(to_string(telefone).length())   << to_string(telefone) << endl;
+	cout << "Morada: "    << setw(morada.length() + 2)            << morada << endl;
+	cout << "Raca: "      << setw(raca.length() + 4)              << raca << endl;
+	cout << "Idade: "     << setw(to_string(idade).length() + 3)  << to_string(idade) << endl;
+
+	if (visitas) {
+		for (unsigned int i = 0; i < registo_visitas.size(); ++i){
+			registo_visitas[i].showVisita();
+		}
+	}
 }
 
 

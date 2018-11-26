@@ -12,6 +12,9 @@
 #include <string>
 #include<algorithm>
 #include <vector>
+#include <ctype.h>
+#include <iterator>
+#include <chrono>
 
 
 #include "Paciente.h"
@@ -26,8 +29,11 @@ public:
 	~MainMenu(){}
 
 	void mostraMenuInicial() const;
-	bool adicionarPaciente(vector<Paciente>& pacientes);
-	void consultarCliente() const;
+	void adicionarPaciente(vector<Paciente>& pacientes);
+	void consultarCliente(vector<Paciente>& pacientes);
+
+	void adicionarEvento(vector<Paciente>& pacientes);
+	void setVisita(vector<Paciente>::iterator& i);
 };
 
 
