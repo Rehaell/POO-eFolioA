@@ -15,8 +15,6 @@
 #include "MainMenu.h"
 
 
-
-
 void popularBaseDados(vector<Paciente>& tPacientes, unsigned int num_pacientes);
 
 int main(){

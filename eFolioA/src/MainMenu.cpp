@@ -65,8 +65,6 @@ void MainMenu::adicionarPaciente(vector<Paciente>& pacientes){
 	cout << "Morada: ";
 	getline(cin, morada);
 
-
-
 	cout << "Raca: ";
 	getline(cin, raca);
 
