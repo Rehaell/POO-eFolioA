@@ -47,7 +47,7 @@ void TipoVisita::showVisita() const {
 	if (tipoEvento=="Internamento"){
 		cout << "Duracao: "   << setw(to_string(duracao).length()) << to_string(duracao) << " dias" << endl;
 		now = localtime(&data_alta);
-		cout << "Data: "   << now->tm_mon << "/" << now->tm_mday << "/" << now->tm_year + 1900 << " " << now->tm_hour << ":" << now->tm_min << ":" << now->tm_sec<< endl;
+		cout << "Data Alta: "   << now->tm_mon << "/" << now->tm_mday << "/" << now->tm_year + 1900 << " " << now->tm_hour << ":" << now->tm_min << ":" << now->tm_sec<< endl;
 	}
 
 }
