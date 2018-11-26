@@ -31,10 +31,12 @@ class Paciente {
 	string raca;
 	int idade;
 
+	//armazena o total de eventos de um determinado Paciente
 	int num_consulta;
 	int num_operacoes;
 	int num_internamento;
 
+	//armazena as visitas de um determinado Paciente
 	vector<TipoVisita> registo_visitas;
 
 public:

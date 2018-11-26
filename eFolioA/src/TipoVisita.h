@@ -38,6 +38,7 @@ public:
 
 		inline int getTipoEvento () const { return evento; }
 
+		//Sobrecarga do operador >
 		//Compara dois objectos do TipoVisita, calculando a diferenca entre as suas datas, se a diferenca for negativa
 		//significa que o objecto corrente e' menor que o objecto a que queremos comparar
 		inline bool operator > (const TipoVisita& v) const { return difftime(data, v.getData()) >= 0.0 ? true : false; }

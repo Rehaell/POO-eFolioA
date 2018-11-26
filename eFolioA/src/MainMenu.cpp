@@ -9,7 +9,14 @@
 
 // Funcoes de da classe MainMenu
 
-//Mostra o menu inicial
+/***************************************************************************
+ * NOME: mostraMenuInicial                                                 *
+ * ------------------------------------------------------------------------*
+ * VARIAVEIS: NIL                                                          *
+ * ------------------------------------------------------------------------*
+ * FUNCAO: apresentar na consola o menu incial                             *
+ *                                                                         *
+ ***************************************************************************/
 void MainMenu::mostraMenuInicial() const {
 	cout<< "\n\n\n\n\n\n\n";
 	cout << R"(
@@ -32,7 +39,15 @@ Pressione a tecla correspondente: )";
 
 }
 
-//Adiciona um paciente ao vector recebido por referencia
+/***************************************************************************
+ * NOME: adicionarPaciente                                                 *
+ * ------------------------------------------------------------------------*
+ * VARIAVEIS: Referencia para um vector de objectos do tipo Paciente       *
+ * ------------------------------------------------------------------------*
+ * FUNCAO: receber via input do utilizador os dados relativos a um dado    *
+ *         cliente e guarda-los no vector pacientes.                       *
+ *                                                                         *
+ ***************************************************************************/
 void MainMenu::adicionarPaciente(vector<Paciente>& pacientes){
 
 	string nome, nomed, morada, raca;
@@ -51,7 +66,7 @@ void MainMenu::adicionarPaciente(vector<Paciente>& pacientes){
 
 	cin.ignore();
 	cout << "Nome: ";
-	getline(cin, nome);
+	getline(cin, nome); //utilizacao do getline para poder receber <espacos>
 
 	cout << "Nome Dono: ";
 	getline(cin, nomed);
@@ -63,7 +78,7 @@ void MainMenu::adicionarPaciente(vector<Paciente>& pacientes){
 
 	cin.ignore();
 	cout << "Morada: ";
-	getline(cin, morada);
+	getline(cin, morada); //utilizacao do getline para poder receber <espacos>
 
 	cout << "Raca: ";
 	getline(cin, raca);
@@ -71,16 +86,27 @@ void MainMenu::adicionarPaciente(vector<Paciente>& pacientes){
 	cout << "Idade: ";
 	cin >> idade;
 
-	pacientes.push_back(Paciente(genero, nome, nomed, telefone, morada, raca, idade));
+	pacientes.push_back(Paciente(genero, nome, nomed, telefone, morada, raca, idade)); //criacao de um objecto do tipo Paciente e subsequente insercao no vector
 }
 
-/*Mostra os pacientes e permite a navegacao pelo vector recebido por referencia
- * Caso nos encontremos nos pontos extremos do vector, nada acontece.
- * Permite tambem retirar o paciente iterado pela posicao actual da navegacao*/
+/***************************************************************************
+ * NOME: consultarCliente                                                  *
+ * ------------------------------------------------------------------------*
+ * VARIAVEIS: Referencia para um vector de objectos do tipo Paciente       *
+ * ------------------------------------------------------------------------*
+ * FUNCAO: apresenta na consola todos os clientes guardados no vector      *
+ *         permite tambem a navegacao pelo vector pacientes e tem em conta *
+ *         a positcao do iterador consoante a navegacao, para que nao      *
+ *         exceda o range do vector pacientes                              *
+ *                                                                         *
+ *         Esta funcao permite ainda a remocao do cliente seleccionado     *
+ *         atraves da sua remocao do vector pacientes                      *
+ *                                                                         *
+ ***************************************************************************/
 void MainMenu::consultarCliente(vector<Paciente>& pacientes) {
 
 	int escolha = 3;
-	vector<Paciente>::iterator i = pacientes.begin();
+	vector<Paciente>::iterator i = pacientes.begin(); //iterador usado para navegar no vector
 	do {
 
 		(*i).showPacienteInfo(false);
@@ -96,7 +122,7 @@ void MainMenu::consultarCliente(vector<Paciente>& pacientes) {
 					++i;
 				break;
 			case (0):
-				pacientes.erase(i);
+				pacientes.erase(i); //remove a posicao actual iterada por i e retorna ao menu principal
 				escolha = 3;
 				break;
 			default:
@@ -106,10 +132,16 @@ void MainMenu::consultarCliente(vector<Paciente>& pacientes) {
 
 }
 
-/* Adiciona uma visita ao vector de pacientes passado por referencia
- *
- * Nota: Esta funcao e' uma extensao da funcao adcionarEvento, e' nesta funcao
- * 	     que efectivamente o evento e' adicionado ao vector  */
+/***************************************************************************
+ * NOME: setVisita                                                         *
+ * ------------------------------------------------------------------------*
+ * VARIAVEIS: Referencia para um iterador de um vector do tipo Paciente    *
+ * ------------------------------------------------------------------------*
+ * FUNCAO: recebe um iterador i que retorna um objecto do tipo Paciente    *
+ *         num vector de objectos Paciente, e adiciona uma visita ao       *
+ *         objecto Paciente iterado por i
+ *                                                                         *
+ ***************************************************************************/
 void MainMenu::setVisita(vector<Paciente>::iterator& i){
 
 	int evento, duracao = 0;
@@ -148,17 +180,25 @@ void MainMenu::setVisita(vector<Paciente>::iterator& i){
 		cin >> duracao;
 	}
 
-	TipoVisita visita(evento, razao, nome_medico, mktime(&tm), duracao);
+	TipoVisita visita(evento, razao, nome_medico, mktime(&tm), duracao); //cria um objecto do tipo TipoVisita
 
-	(*i).setVisita(visita);
+	(*i).setVisita(visita); //atribui uma visita a um objecto Pa	ciente iterado por i
 }
 
-/* Submenu de adicionar evento, permite navegar no vector pacientes mostrando os eventos
- * de cada paciente, quando atinge os extremos do vector para de mostrar os pacientes
- * Permite tambem chamar a subfuncao setVisita para efectivamente adicionar o evento ao vector Pacientes */
+/***************************************************************************
+ * NOME: adicionarEvento                                                   *
+ * ------------------------------------------------------------------------*
+ * VARIAVEIS: Referencia para um iterador de um vector do tipo Paciente    *
+ * ------------------------------------------------------------------------*
+ * FUNCAO: recorre a funcao setVisita para adicionar um evento a um        *
+ *         determinado objecto do tipo Paciente. Permite tambem percorrer  *
+ *         o vector pacientes e verificar todos os eventos atribuidos a um *
+ *         determinado paciente                                            *
+ *                                                                         *
+ ***************************************************************************/
 void MainMenu::adicionarEvento(vector<Paciente>& pacientes) {
 	int escolha = 10;
-	vector<Paciente>::iterator i = pacientes.begin();
+	vector<Paciente>::iterator i = pacientes.begin(); //iterador para um vector do tipo Paciente
 	do {
 
 		(*i).showPacienteInfo(false);
@@ -174,7 +214,7 @@ void MainMenu::adicionarEvento(vector<Paciente>& pacientes) {
 					++i;
 				break;
 			case (6):
-				setVisita(i);
+				setVisita(i); //adiciona uma visita ao objecto actual do tipo Paciente
 				i = pacientes.begin();
 				break;
 			default:
@@ -184,10 +224,19 @@ void MainMenu::adicionarEvento(vector<Paciente>& pacientes) {
 }
 
 
-/* Submenu consultar visitas
- * Permite mostrar todos os compromissos de todos os pacientes
- * Um sumario de eventos por cliente
- * E um sumario de eventos organizado por mes*/
+/***************************************************************************
+ * NOME: consultarVisitas                                                  *
+ * ------------------------------------------------------------------------*
+ * VARIAVEIS: Referencia para um iterador de um vector do tipo Paciente    *
+ * ------------------------------------------------------------------------*
+ * FUNCAO: permite consultar visitas na sua totalitade, por cliente, ou    *
+ *         por mes. Quando selecionada a opcao 1 o programa mostra todos   *
+ *         os clientes presentes na base de dados e os seus respectivos    *
+ *         eventos. A opcao numero 2 mostra apenas os totais de visitas    *
+ *         por tipo de evento, e a opcao 3 mostra os totais de visitas por *
+ *         tipo de evento organizado por mes
+ *                                                                         *
+ ***************************************************************************/
 void MainMenu::consultarVisitas(vector<Paciente>& pacientes) {
 
 	int escolha = 3;
@@ -215,7 +264,7 @@ Pressione a tecla correspondente: )";
 					pacientes[i].showPacienteInfo(true);
 				break;
 			case (2):
-				for(unsigned int i = 0; i < pacientes.size(); ++i) {
+				for(unsigned int i = 0; i < pacientes.size(); ++i) { //percorre o vector e imprime o nome do paciente e as respectivas visitas
 					cout << "\nPaciente: " << pacientes[i].getNome() << endl;
 					cout << "Total de Visitas: " << pacientes[i].getVisitas() << endl;
 					cout << "Total de Consultas" << pacientes[i].getConsultas() << endl;
@@ -233,10 +282,17 @@ Pressione a tecla correspondente: )";
 
 }
 
-/* Funcao de apoio a funcao consultarVisitas
- * Conta o numero de eventos por tipo, e organiza-os num vector meses de tamanho 12
- * correspondente ao numero de meses
- * No final mostra a contagem por posicao do vector de cada tipo de evento*/
+/***************************************************************************
+ * NOME: OcorrenciasPorMes                                                  *
+ * ------------------------------------------------------------------------*
+ * VARIAVEIS: Referencia para um iterador de um vector do tipo Paciente    *
+ * ------------------------------------------------------------------------*
+ * FUNCAO: imprime um vector de objectos do tipo Mes de tamanho fixo 12    *
+ *         e que corresponde aos 12 meses do ano. Cada posicao do vector   *
+ *         armazenda na sua estrutura uma contagem do total de tipo de     *
+ *         evento realizado nesse mes                                      *
+ *                                                                         *
+ ***************************************************************************/
 void MainMenu::OcorrenciasPorMes(vector<Paciente>& pacientes) {
 
 	struct Mes{
@@ -251,17 +307,18 @@ void MainMenu::OcorrenciasPorMes(vector<Paciente>& pacientes) {
 		vector<TipoVisita> visitas = pacientes[i].getRegisto();
 		for(unsigned int j = 0;  j< visitas.size(); ++j){
 			time_t t = visitas[j].getData();
-			tm* tm = localtime(&t);
+			tm* tm = localtime(&t); //retorna a data da visita
 			if (visitas[j].getTipoEvento() == 1){
-				meses[tm->tm_mon].consultas += 1;
+				meses[tm->tm_mon].consultas += 1; //itera no vector meses, na posicao dada pelo mes e soma +1 ao tipo de evento correspondente
 			} else if (visitas[j].getTipoEvento() == 2){
-			 	meses[tm->tm_mon].operacoes += 1;
+			 	meses[tm->tm_mon].operacoes += 1; //itera no vector meses, na posicao dada pelo mes e soma +1 ao tipo de evento correspondente
 			} else if (visitas[j].getTipoEvento() == 3){
-				meses[tm->tm_mon].internamentos+= 1;
+				meses[tm->tm_mon].internamentos+= 1; //itera no vector meses, na posicao dada pelo mes e soma +1 ao tipo de evento correspondente
 			}
 		}
 	}
 
+	//no final, percorre o vector meses e imprime todas os meses e as respectivas contagens de eventos por tipo
 	for(unsigned int i=0; i<meses.size(); ++i ) {
 		cout << "\nOcorrencias mes: " << i + 1<< endl;
 		cout << "Consultas : " << meses[i].consultas << endl;

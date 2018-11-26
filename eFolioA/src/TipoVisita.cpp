@@ -23,6 +23,14 @@ TipoVisita::TipoVisita(int event, string reason, string medic, time_t date, int 
 		duracao = 0;
 }
 
+/***************************************************************************
+ * NOME: showVisita                                                        *
+ * ------------------------------------------------------------------------*
+ * VARIAVEIS: NIL                                                          *
+ * ------------------------------------------------------------------------*
+ * FUNCAO: imprime na consola os dados relativos a uma visita              *
+ *                                                                         *
+ ***************************************************************************/
 void TipoVisita::showVisita() const {
 
 	string tipoEvento = "";

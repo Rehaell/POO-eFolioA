@@ -11,7 +11,6 @@
 #include "Paciente.h"
 
 
-using namespace std;
 
 Paciente::Paciente(int generop, string nomep, string nomed, unsigned int telefonep, string moradap, string racap, int idadep){
 	genero = Genero(generop);
@@ -26,9 +25,16 @@ Paciente::Paciente(int generop, string nomep, string nomed, unsigned int telefon
 	num_internamento = 0;
 }
 
-/* Adiciona uma visita ao vector registo de visitas, organizando-o por ordem mais recente
- * Actualiza tambem o total de tipo eventos que um dado paciente ja realizou desde sempre
- * */
+/***************************************************************************
+ * NOME: setVisita                                                         *
+ * ------------------------------------------------------------------------*
+ * VARIAVEIS: um objecto do tipo visita                                    *
+ * ------------------------------------------------------------------------*
+ * FUNCAO: adiciona ao vector registo_visitas o objecto recebido como      *
+ *         parametro, apos a insercao organiza o vector por data mais      *
+ *         recente e actualiza o total de eventos                          *
+ *                                                                         *
+ ***************************************************************************/
 void Paciente::setVisita(TipoVisita visita) {
 	registo_visitas.push_back(visita);
 	sort(registo_visitas.begin(),registo_visitas.end(), greater<TipoVisita>());
@@ -47,9 +53,16 @@ void Paciente::setVisita(TipoVisita visita) {
 	};
 }
 
-/*
- * Mostra as informacoes de um dado paciente
- * Opcional: quando visitas = true, mostra tambem todos os eventos realizados*/
+/***************************************************************************
+ * NOME: showPacienteInfo                                                  *
+ * ------------------------------------------------------------------------*
+ * VARIAVEIS: uma variavel booleana visitas                                *
+ * ------------------------------------------------------------------------*
+ * FUNCAO: mostra todos os dados de um determinado paciente na consola     *
+ *         caso a variavel booleana visitas seja igual TRUE entao os dados *
+ *         relativos as visitas a clinica tambem serao impressos           *
+ *                                                                         *
+ ***************************************************************************/
 void Paciente::showPacienteInfo(bool visitas) const{
 	string pgenero = (genero == 1 ? "Cao" : "Gato");
 	cout << "\n\n\n\n\n\n\n\n\n\n";
